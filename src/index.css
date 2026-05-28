@@ -1,0 +1,1541 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Chronos Sand Theme Color Palette - Warm Light Mode */
+  --bg-main: #eae7e2;          /* Light sand background */
+  --bg-card: #f5f3ef;          /* Eggshell cream elevated background */
+  --bg-card-hover: #e6e3dd;    /* Slightly darker beige */
+  --border-color: #c8c4bc;     /* Light grey-brown border */
+  --border-glow: transparent;
+
+  /* Accent Colors adapted to Chronos Branding */
+  --accent-purple: #c87a65;    /* Terracotta mascot color */
+  --accent-purple-glow: rgba(200, 122, 101, 0.12);
+  
+  --accent-cyan: #6a83a5;      /* Steel-blue/Slate-blue */
+  --accent-cyan-glow: rgba(106, 131, 165, 0.12);
+  
+  --accent-green: #95ad71;     /* Moss green (positive events) */
+  --accent-green-glow: rgba(149, 173, 113, 0.12);
+  
+  --accent-red: #c25852;       /* Terracotta-red (error/negative) */
+  
+  --text-primary: #353432;     /* Dark charcoal-brown for high contrast readability */
+  --text-secondary: #686661;   /* Medium grey-brown */
+  --text-muted: #9b9890;       /* Muted grey-brown */
+
+  --sidebar-width: 260px;
+  --right-panel-width: 320px;
+  --header-height: 70px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+/* Custom Scrollbar - Warm Earthy Tones */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+}
+::-webkit-scrollbar-thumb {
+  background: #c8c4bc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a39f97;
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Sidebar Left - Chronos Minimal Sand Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  border-right: 1px solid var(--border-color);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--bg-main);
+  z-index: 10;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: all 0.15s ease-in-out;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.nav-item.active {
+  color: #ffffff;
+  background: var(--accent-cyan); /* Active state highlighted in Steel-Blue */
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+
+.nav-item.active svg {
+  color: #ffffff;
+}
+
+/* User Account Display in Sidebar */
+.user-profile-summary {
+  margin-top: auto;
+  padding: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.user-handle {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  background: var(--bg-main);
+}
+
+/* Feed Column (Middle) */
+.feed-column {
+  flex: 1;
+  border-right: 1px solid var(--border-color);
+  min-width: 0;
+  padding-bottom: 5rem;
+  background: var(--bg-main);
+}
+
+.column-header {
+  height: var(--header-height);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  background: rgba(234, 231, 226, 0.85); /* Semi-transparent sand */
+  backdrop-filter: blur(12px);
+  z-index: 9;
+}
+
+.column-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+/* Right Panel (Details / Widgets) */
+.right-panel {
+  width: var(--right-panel-width);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  background: var(--bg-main);
+}
+
+/* Warm Card Widgets */
+.widget-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.widget-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+}
+
+/* Credits Indicator Widget */
+.credits-battery {
+  display: flex;
+  gap: 0.35rem;
+  margin: 0.75rem 0 1rem;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.4rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.battery-cell {
+  flex: 1;
+  height: 20px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.battery-cell.filled {
+  background: var(--accent-cyan); /* Styled in soft steel blue */
+  box-shadow: none;
+}
+
+.battery-cell.filled.low {
+  background: var(--accent-red);   /* Soft crimson red */
+  box-shadow: none;
+}
+
+.credits-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.credits-count {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+/* Token Wallet Widget */
+.wallet-balance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.wallet-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.wallet-amount {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+.wallet-amount-usd {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.token-badge {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.wallet-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-wallet-action {
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.btn-wallet-action:hover {
+  background: var(--bg-card-hover);
+  border-color: #a39f97;
+}
+
+/* Chat bubble styling for Aura/Chroni Agent */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--header-height));
+  position: relative;
+  background: var(--bg-main);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Chronos Chat Bubbles - High legibility, neutral gray-cream borders */
+.chat-bubble {
+  max-width: 75%;
+  padding: 0.9rem 1.15rem;
+  border-radius: 18px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  position: relative;
+  animation: slideUp 0.2s ease-out;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.chat-bubble.assistant {
+  align-self: flex-start;
+  background: var(--bg-card); /* Eggshell white card */
+  border: 1.5px solid var(--border-color);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: var(--accent-cyan); /* User bubble in steel-blue */
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble-meta {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.chat-bubble.assistant .chat-bubble-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--accent-purple); /* Mascot terracotta highlight */
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.chat-bubble.user .chat-bubble-meta {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: right;
+  font-weight: 500;
+}
+
+/* Onboarding Mascot Center Card */
+.mascot-onboarding-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 1rem 0;
+  max-width: 480px;
+  align-self: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.mascot-image-large {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 1.25rem;
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.mascot-name-badge {
+  background: var(--accent-purple-glow);
+  color: var(--accent-purple);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  border: 1px solid rgba(200, 122, 101, 0.25);
+}
+
+/* Roadmap timeline in Chat - Chronos Path */
+.roadmap-container {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.roadmap-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-transform: uppercase;
+}
+
+.roadmap-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.roadmap-step.active {
+  border-color: var(--accent-cyan);
+  background: #ffffff;
+}
+
+.roadmap-step.completed {
+  background: rgba(149, 173, 113, 0.05);
+  border-color: var(--accent-green);
+  opacity: 0.85;
+}
+
+.step-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  background: #ffffff;
+}
+
+.roadmap-step.active .step-indicator {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.roadmap-step.completed .step-indicator {
+  border-color: var(--accent-green);
+  background: var(--accent-green);
+  color: #ffffff;
+}
+
+.step-details {
+  min-width: 0;
+}
+
+.step-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.step-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Chat Input */
+.chat-input-area {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-main);
+}
+
+.chat-input-wrapper {
+  display: flex;
+  gap: 0.75rem;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  padding: 0.4rem 0.75rem;
+  border-radius: 14px;
+  align-items: center;
+  transition: border-color 0.15s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.chat-input-wrapper:focus-within {
+  border-color: var(--accent-cyan);
+}
+
+.chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  padding: 0.4rem 0;
+  resize: none;
+  height: 20px;
+}
+
+.chat-send-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--accent-cyan); /* Steel blue send button */
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.chat-send-btn:hover {
+  opacity: 0.9;
+}
+
+.chat-send-btn:disabled {
+  background: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Test/Quiz milestone card inside Chat - Apple Elevate style with warm palette */
+.milestone-challenge-card {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin: 0.75rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.challenge-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.challenge-question {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.challenge-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.challenge-option {
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.challenge-option:hover {
+  background: var(--bg-card-hover);
+  border-color: #a39f97;
+}
+
+.challenge-option.selected {
+  background: var(--accent-cyan-glow);
+  border-color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.challenge-submit-btn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--accent-cyan);
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.challenge-submit-btn:hover {
+  opacity: 0.9;
+}
+
+/* X-like Social Feed Component */
+.social-feed {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Feed Creator area */
+.feed-creator {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+  background: var(--bg-main);
+}
+
+.feed-creator-input-container {
+  flex: 1;
+}
+
+.feed-creator-textarea {
+  width: 100%;
+  min-height: 70px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  resize: none;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.01);
+}
+
+.feed-creator-textarea:focus {
+  border-color: var(--accent-cyan);
+}
+
+.feed-creator-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.feed-creator-tools {
+  display: flex;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.feed-creator-tool-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition: background 0.15s;
+}
+
+.feed-creator-tool-btn:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-primary);
+}
+
+.btn-post {
+  padding: 0.5rem 1.1rem;
+  background: var(--accent-cyan); /* Steel blue post button */
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn-post:hover {
+  opacity: 0.9;
+}
+
+.btn-post:disabled {
+  background: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Feed Filter Tabs */
+.feed-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-main);
+}
+
+.feed-tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.85rem 0;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: color 0.15s;
+  border-bottom: 2.5px solid transparent;
+}
+
+.feed-tab:hover {
+  color: var(--text-primary);
+}
+
+.feed-tab.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-cyan);
+}
+
+/* Social Post Card */
+.post-card {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+  transition: background-color 0.15s;
+  background: var(--bg-main);
+}
+
+.post-card:hover {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+.post-body {
+  flex: 1;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.post-author-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+}
+
+.post-author-handle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.post-time {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.post-content {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* Embed Achievement inside post - Warm Cream Box */
+.achievement-embed {
+  margin-top: 0.75rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.01);
+}
+
+.achievement-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-purple); /* Mascot color */
+  flex-shrink: 0;
+}
+
+.achievement-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.achievement-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.achievement-token-earned {
+  color: var(--accent-green);
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Post Actions (Like, repost, comment) */
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  max-width: 360px;
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.post-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.78rem;
+  transition: color 0.15s;
+  padding: 0.25rem;
+}
+
+.post-action-btn:hover.btn-like {
+  color: var(--accent-red);
+}
+
+.post-action-btn.liked {
+  color: var(--accent-red);
+}
+
+.post-action-btn:hover.btn-repost {
+  color: var(--accent-green);
+}
+
+.post-action-btn.reposted {
+  color: var(--accent-green);
+}
+
+.post-action-btn:hover.btn-comment {
+  color: var(--accent-cyan);
+}
+
+.post-action-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Collaborative Task Board Component */
+.task-board {
+  padding: 2rem 1.5rem;
+}
+
+.task-board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.btn-create-task {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  background: var(--accent-cyan);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn-create-task:hover {
+  opacity: 0.9;
+}
+
+.tasks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.task-item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+}
+
+.task-item-card:hover {
+  border-color: var(--text-secondary);
+}
+
+.task-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-creator-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.task-creator-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.65rem;
+  color: var(--text-primary);
+}
+
+.task-creator-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.task-rewards {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.reward-badge {
+  padding: 0.2rem 0.45rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.reward-badge.credit {
+  background: var(--accent-cyan-glow);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(106, 131, 165, 0.2);
+}
+
+.reward-badge.token {
+  background: var(--accent-green-glow);
+  color: var(--accent-green);
+  border: 1px solid rgba(149, 173, 113, 0.2);
+}
+
+.task-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.task-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.task-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
+.task-category {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.03);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.btn-action-task {
+  padding: 0.4rem 0.85rem;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-action-task:hover {
+  background: var(--bg-card-hover);
+}
+
+.btn-action-task.completed {
+  background: rgba(149, 173, 113, 0.06);
+  border-color: rgba(149, 173, 113, 0.15);
+  color: var(--accent-green);
+  cursor: default;
+}
+
+/* Crypto Wallet View */
+.crypto-wallet-view {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.wallet-overview-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+}
+
+.wallet-overview-address {
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  background: #ffffff;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  width: fit-content;
+  margin-top: 0.5rem;
+  border: 1.5px solid var(--border-color);
+}
+
+/* Token Price Chart Simulation - Soft Sand Bars */
+.wallet-chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chart-token-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.chart-change {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+}
+
+.chart-change.positive {
+  background: var(--accent-green-glow);
+  color: var(--accent-green);
+}
+
+.chart-canvas-sim {
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding-top: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chart-bar-sim {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1.5px solid var(--border-color);
+  border-radius: 3px 3px 0 0;
+  min-height: 5px;
+  position: relative;
+  transition: all 0.15s;
+}
+
+.chart-bar-sim:hover {
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.chart-bar-sim:hover::after {
+  content: attr(data-price);
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Swap Dashboard */
+.swap-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.swap-input-group {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.35rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.swap-input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  font-weight: 700;
+  outline: none;
+  width: 60%;
+}
+
+.swap-select {
+  background: var(--bg-main);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.swap-divider {
+  display: flex;
+  justify-content: center;
+  margin: 0.35rem 0;
+}
+
+.swap-divider-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.swap-divider-btn:hover {
+  transform: rotate(180deg);
+  background: var(--bg-card-hover);
+}
+
+.btn-swap-execute {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent-cyan);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin-top: 0.75rem;
+}
+
+.btn-swap-execute:hover {
+  opacity: 0.9;
+}
+
+/* Transaction ledger */
+.ledger-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.ledger-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.ledger-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  font-size: 0.8rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.01);
+}
+
+.ledger-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ledger-type-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  border: 1.5px solid transparent;
+}
+
+.ledger-type-icon.in {
+  background: rgba(149, 173, 113, 0.08);
+  color: var(--accent-green);
+  border-color: rgba(149, 173, 113, 0.2);
+}
+
+.ledger-type-icon.out {
+  background: rgba(194, 88, 82, 0.08);
+  color: var(--accent-red);
+  border-color: rgba(194, 88, 82, 0.2);
+}
+
+.ledger-item-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ledger-item-time {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.ledger-amount {
+  font-weight: 700;
+}
+
+.ledger-amount.in {
+  color: var(--accent-green);
+}
+
+.ledger-amount.out {
+  color: var(--text-primary);
+}
+
+/* Modals - Clean Sand Card */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 460px;
+  animation: modalEnter 0.15s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+/* Keyframes */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive CSS */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 80px;
+  }
+  
+  .logo-text, .nav-item span, .user-info {
+    display: none;
+  }
+  
+  .logo-section, .nav-item {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+  
+  .right-panel {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    padding: 0.75rem 1rem;
+    background: var(--bg-main);
+  }
+  
+  .logo-section {
+    margin-bottom: 0;
+    padding: 0;
+  }
+  
+  .nav-links {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+  
+  .nav-item {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .user-profile-summary {
+    display: none;
+  }
+  
+  .main-content {
+    flex-direction: column;
+  }
+  
+  .chat-container {
+    height: calc(100vh - 120px);
+  }
+}
